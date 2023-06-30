@@ -28,7 +28,7 @@ struct ImageSliderView: View {
                 }
             }.padding()
         }.padding()
-            .onAppear{Timer.scheduledTimer(withTimeInterval: 5, repeats: true){ timer in
+            .onAppear{Timer.scheduledTimer(withTimeInterval: 7, repeats: true){ timer in
             if self.curentIndex + 1 == self.slides.count{
                 self.curentIndex = 0
             }else{
