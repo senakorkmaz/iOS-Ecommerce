@@ -29,7 +29,7 @@ struct HomePageView: View {
                         Spacer()
                         
                         Image(systemName: "circle.grid.2x2.fill")
-                            .foregroundColor(Color("kPrimary "))
+                            .foregroundColor(Color("kPrimary"))
                     }
                     .padding()
                     
@@ -79,7 +79,9 @@ struct AppBar: View {
                     
                     Spacer()
                     
-                    NavigationLink( destination: Text("")){
+                    NavigationLink( destination: CartView()
+                        .environmentObject(cartManager)
+                    ){
                         CartButton(numberOfProducts: cartManager.products.count)
                     }
                 }
