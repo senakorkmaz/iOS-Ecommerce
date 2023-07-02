@@ -12,30 +12,50 @@ struct CartView: View {
     var body: some View {
         VStack{
            
-                if cartManager.products.count > 0{
+                if cartManager.cartProducts.count > 0{
                     ScrollView(){
                         VStack(spacing: 0){
-                            ForEach(cartManager.products){ product in
-                                CartProductView(product: product)
+                            ForEach(cartManager.cartProducts){ cartProduct in
+                                
+                                NavigationLink{
+                                    ProductDetailsView(product: cartProduct.product)
+                                        .environmentObject(cartManager)
+                                } label: {
+                                    CartProductView(product: cartProduct.product)
+                                        
+                                }
                             }
+                            
                         }
                     }
                     
-                    VStack(spacing: 2){
+                    VStack{
                         HStack{
                             Text("Your Total is: ")
+                            Spacer()
                             Text("$ \(cartManager.total)")
                                 .bold()
-                            Spacer()
-                            
                         }
-                        .padding(.bottom,50)
-                    
+                        .padding()
+                       
                         PaymentButton(action: {})
-                            .frame(maxWidth: 300, maxHeight: 20)
-                    }.padding(.bottom,80)
+                            .frame(width: 400, height: 35)
+                    }.padding(.bottom,65)
+                    
+
                 }else{
-                    Text("Your Cart is Empty")
+                    VStack(spacing: 10){
+                        Image(systemName: "cart.badge.minus")
+                            .resizable()
+                            .frame(width: 230,height: 200)
+                            .opacity(0.2)
+                            .foregroundColor(Color("kPrimary"))
+                        
+                        Text("No Items in Your Cart")
+                            .opacity(0.4)
+                            .foregroundColor(Color("kPrimary"))
+                    }
+                    
                 }
             
             

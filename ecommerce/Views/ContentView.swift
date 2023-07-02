@@ -20,6 +20,7 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $currentTab){
             HomePageView()
+                .environmentObject(cartManeger)
                 .tag(Tab.Home)
             Text("Serach View")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -29,13 +30,14 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background()
                 .tag(Tab.Notifications)
-            CartView()
+            Text("Cart View")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background()
                 .tag(Tab.Cart)
             Text("Profile View")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background()
                 .tag(Tab.Profile)
-            
         }.overlay(
             
             HStack(spacing: 0){

@@ -28,11 +28,31 @@ struct CartProductView: View {
             
             Spacer()
             
-            Image(systemName: "trash")
-                .foregroundColor(.red)
-                .onTapGesture {
-                    cartManager.removeFromCart(product: product)
+            HStack(spacing: 4){
+                let productCount = cartManager.getProductCount(product: product)
+                Image(systemName: "plus.square")
+                    .foregroundColor(.black)
+                    .onTapGesture {
+                        cartManager.addToCart(product: product)
+                    }
+                Text("\(productCount)")
+                if  productCount == 1 {
+                    
+                    Image(systemName: "trash")
+                        .foregroundColor(.black)
+                        .onTapGesture {
+                            cartManager.removeFromCart(product: product)
+                        }
+                }else{
+                    Image(systemName: "minus.square")
+                        .foregroundColor(.black)
+                        .onTapGesture {
+                            cartManager.minusProductCart(product: product)
+                        }
+                    
                 }
+            }
+            
         }
         .padding(.horizontal)
         .background(Color("kSecondary"))
